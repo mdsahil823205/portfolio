@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahil Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+  /* ===== MOBILE FIX: BELOW 450px ===== */
+  @media (max-width: 450px) {
+
+    /* NAVBAR */
+    nav h1 {
+      font-size: 1.5rem;
+    }
+    #menu-btn {
+      font-size: 2rem;
+    }
+
+    /* HERO SECTION */
+    #home .backdrop-blur-xl {
+      padding: 1.8rem !important;
+    }
+
+    #home h1 {
+      font-size: 2.2rem !important;
+      line-height: 2.6rem !important;
+    }
+
+    #home h2 {
+      font-size: 1rem !important;
+    }
+
+    #home p {
+      font-size: 0.95rem !important;
+    }
+
+    #home a {
+      padding: 0.6rem 1.3rem !important;
+      font-size: 0.9rem !important;
+    }
+
+    /* ABOUT SECTION */
+    #about p {
+      font-size: 1rem !important;
+      line-height: 1.5rem !important;
+    }
+    #about h2 {
+      font-size: 2rem !important;
+    }
+
+    /* SKILLS GRID */
+    #skills .grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 1rem !important;
+    }
+
+    #skills img {
+      height: 40px !important;
+    }
+
+    #skills p {
+      font-size: 0.9rem !important;
+    }
+
+    /* PROJECT CARDS */
+    #projects .grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    #projects article {
+      padding: 1.2rem !important;
+    }
+
+    #projects h4 {
+      font-size: 1.2rem !important;
+    }
+
+    #projects p {
+      font-size: 0.9rem !important;
+    }
+
+    /* ULTIMATE PROJECT */
+    #projects article:last-child {
+      padding: 1.5rem !important;
+    }
+    #projects h3.text-2xl {
+      font-size: 1.6rem !important;
+    }
+    #projects h4.text-3xl {
+      font-size: 1.8rem !important;
+    }
+
+    /* CONTACT */
+    #contact input, #contact textarea {
+      font-size: 0.9rem !important;
+      padding: 0.7rem !important;
+    }
+
+    #contact button {
+      font-size: 1rem;
+      padding: 0.8rem !important;
+    }
+  }
+
+</style>
+
+</head>
+
+<body class="bg-gray-900 text-white scroll-smooth">
+  
+  <!-- ========== NAVBAR ========== -->
+  <nav class="flex justify-between items-center px-6 py-4 bg-gray-900 fixed w-full top-0 z-50 shadow-lg">
+    <h1 class="text-3xl font-bold">Md Sahil</h1>
+
+    <!-- Desktop Menu -->
+    <ul class="hidden md:flex space-x-8 text-lg">
+      <li><a href="#home" class="hover:text-blue-400 font-light">Home</a></li>
+      <li><a href="#about" class="hover:text-blue-400 font-light">About</a></li>
+      <li><a href="#skills" class="hover:text-blue-400 font-light">Skills</a></li>
+      <li><a href="#projects" class="hover:text-blue-400 font-light">Projects</a></li>
+      <li><a href="#contact" class="hover:text-blue-400 font-light">Contact</a></li>
+    </ul>
+
+    <!-- Hamburger -->
+    <button id="menu-btn" class="md:hidden text-3xl">☰</button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <ul id="mobile-menu" 
+      class="hidden md:hidden flex-col bg-gray-800 text-lg py-4 px-6 space-y-4 
+             absolute top-16 left-0 w-full z-40 transition-all duration-300">
+    <li><a href="#home" class="hover:text-blue-400">Home</a></li>
+    <li><a href="#about" class="hover:text-blue-400">About</a></li>
+    <li><a href="#skills" class="hover:text-blue-400">Skills</a></li>
+    <li><a href="#projects" class="hover:text-blue-400">Projects</a></li>
+    <li><a href="#contact" class="hover:text-blue-400">Contact</a></li>
+  </ul>
+
+ <!-- ==========  HERO SECTION ========== -->
+<section id="home"
+  class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-28 overflow-hidden">
+
+  <!-- Glass Card -->
+  <div class="backdrop-blur-xl bg-white/5 border border-white/10 p-10 rounded-2xl max-w-2xl mx-auto shadow-xl animate-fadeUp">
+
+    <!-- Heading -->
+    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+      Hi, I'm <span class="text-blue-400">Sahil</span>
+    </h1>
+
+    <!-- Typing Animation Text -->
+    <h2 class="mt-4 text-xl md:text-2xl font-semibold text-gray-300">
+      <span id="typing-text"></span><span class="text-blue-400 font-bold">|</span>
+    </h2>
+
+    <!-- Description -->
+    <p class="mt-4 text-gray-300 max-w-xl mx-auto text-lg">
+      I build modern, smooth and interactive digital experiences using MERN, Python & AI-driven technologies.
+    </p>
+
+    <!-- Buttons -->
+    <div class="mt-8 flex space-x-4 justify-center">
+      <a href="#projects"
+         class="px-6 py-3 bg-blue-500 rounded-lg text-lg font-semibold hover:bg-blue-600 transition shadow-lg hover:shadow-blue-500/40">
+        View Projects
+      </a>
+
+      <a href="#contact"
+         class="px-6 py-3 border border-gray-300 rounded-lg text-lg font-semibold hover:bg-gray-800 transition shadow-lg">
+        Contact Me
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ========== HERO SECTION ANIMATIONS ========== -->
+<style>
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0);   }
+  }
+  .animate-fadeUp {
+    animation: fadeUp 1.2s ease-out forwards;
+  }
+
+  /* Very subtle floating effect */
+  @keyframes slowMove {
+    0%   { transform: translate(-50%, 0); }
+    50%  { transform: translate(-50%, -20px); }
+    100% { transform: translate(-50%, 0); }
+  }
+  .animate-slowMove {
+    animation: slowMove 10s ease-in-out infinite;
+  }
+</style>
+
+<!-- Typing Animation Script -->
+<script>
+  const roles = [
+    "Full Stack MERN Developer",
+    "Front-end Engineer",
+    "AI-Driven App Builder",
+    "Creative Web Designer",
+    "Problem Solver"
+  ];
+
+  let i = 0;
+  let j = 0;
+  let current = "";
+  let isDeleting = false;
+
+  function typeEffect() {
+    current = roles[i];
+
+    if (!isDeleting) {
+      document.getElementById("typing-text").textContent = current.slice(0, j++);
+      if (j === current.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, 1200);
+        return;
+      }
+    } else {
+      document.getElementById("typing-text").textContent = current.slice(0, j--);
+      if (j === 0) {
+        isDeleting = false;
+        i = (i + 1) % roles.length;
+      }
+    }
+
+    setTimeout(typeEffect, isDeleting ? 60 : 80);
+  }
+
+  typeEffect();
+</script>
+
+
+<!-- ========== ABOUT SECTION (PREMIUM) ========== -->
+<section id="about" class="px-6 md:px-20 py-20">
+  
+  <h2 class="text-4xl font-bold mb-10 text-blue-400">About Me</h2>
+
+  <div class="max-w-4xl leading-relaxed space-y-6 text-gray-300 text-lg">
+
+    <p>
+      Hi, I'm <span class="text-blue-400 font-semibold">Sahil</span>  a passionate 
+      <span class="text-white font-semibold">Full Stack MERN Developer</span> and 
+      <span class="text-white font-semibold">AI-driven Application Builder</span> focused on crafting 
+      beautiful, responsive, and high-performance digital experiences.
+    </p>
+
+    <p>
+      I love turning ideas into real products. Whether it’s building stunning 
+      front-end interfaces, architecting scalable backends, or experimenting with AI-powered automation, 
+      I enjoy creating things that feel smooth, modern, and impactful.
+    </p>
+
+    <p>
+      Over time, I’ve built everything from 
+      <span class="text-white font-semibold">E-commerce platforms</span>, 
+      <span class="text-white font-semibold">Realtime Web-based OS</span>, 
+      and <span class="text-white font-semibold">Animation-rich award-style interfaces</span> 
+      to intelligent <span class="text-white font-semibold">AI-powered applications</span> and a 
+      next-gen virtual co-working system controlled by autonomous agents.
+    </p>
+
+    <p>
+      My goal is simple to become a developer who builds experiences that people 
+      <span class="text-blue-400 font-semibold">remember</span>, 
+      products that truly <span class="text-white font-semibold">solve problems</span>, 
+      and interfaces that feel <span class="text-white font-semibold">alive</span>.
+    </p>
+
+  </div>
+
+  <!-- Highlights -->
+  <div class="grid md:grid-cols-3 gap-6 mt-12">
+
+    <div class="bg-gray-800 p-6 rounded-xl text-center">
+      <h3 class="text-xl font-bold text-blue-400">3+ Years</h3>
+      <p class="text-gray-400 mt-2">Building modern websites & apps</p>
+    </div>
+
+    <div class="bg-gray-800 p-6 rounded-xl text-center">
+      <h3 class="text-xl font-bold text-blue-400">MERN Stack</h3>
+      <p class="text-gray-400 mt-2">Frontend + Backend + APIs</p>
+    </div>
+
+    <div class="bg-gray-800 p-6 rounded-xl text-center">
+      <h3 class="text-xl font-bold text-blue-400">AI/Automation</h3>
+      <p class="text-gray-400 mt-2">Building apps with AI-driven workflows</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========== SKILLS SECTION WITH LOGOS ========== -->
+<section id="skills" class="px-6 md:px-20 py-20">
+  <h2 class="text-4xl font-bold mb-6 text-blue-400">Skills</h2>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+
+    <!-- HTML -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="h-12" />
+      <p class="mt-3 text-lg">HTML</p>
+    </div>
+
+    <!-- CSS -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="h-12" />
+      <p class="mt-3 text-lg">CSS</p>
+    </div>
+
+    <!-- JavaScript -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="h-12" />
+      <p class="mt-3 text-lg">JavaScript</p>
+    </div>
+
+    <!-- MongoDB -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="h-12" />
+      <p class="mt-3 text-lg">MongoDB</p>
+    </div>
+
+    <!-- Express -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" class="h-12 invert" />
+      <p class="mt-3 text-lg">Express.js</p>
+    </div>
+
+    <!-- React -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="h-12" />
+      <p class="mt-3 text-lg">React.js</p>
+    </div>
+
+    <!-- Node.js -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" class="h-12" />
+      <p class="mt-3 text-lg">Node.js</p>
+    </div>
+
+   <!-- Tailwind CSS FIXED -->
+<div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+  <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" class="h-12" />
+  <p class="mt-3 text-lg">Tailwind CSS</p>
+</div>
+
+
+    <!-- React Native -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="h-12" />
+      <p class="mt-3 text-lg">React Native</p>
+    </div>
+
+    <!-- Git -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="h-12" />
+      <p class="mt-3 text-lg">Git</p>
+    </div>
+
+    <!-- GitHub -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="h-12 invert" />
+      <p class="mt-3 text-lg">GitHub</p>
+    </div>
+
+    <!-- Python -->
+    <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="h-12" />
+      <p class="mt-3 text-lg">Python</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ========== PROJECTS SECTION (UPDATED WITH YOUR PROJECTS) ========== -->
+<section id="projects" class="px-6 md:px-20 py-20">
+  <h2 class="text-4xl font-bold mb-6 text-blue-400">Projects</h2>
+
+  <!-- FRONT-END PROJECTS -->
+  <h3 class="text-2xl font-semibold mb-4 text-gray-200">Front-end Projects</h3>
+  <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+    <!-- Snitch -->
+    <article class="bg-gray-800 p-6 rounded-lg flex flex-col justify-between">
+      <div>
+        <h4 class="text-xl font-bold">Snitch</h4>
+        <p class="text-gray-400 mt-2 text-sm">
+          A market-leading e-commerce platform focused on fast UX, rich product pages and seamless checkout.
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">React</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">Next.js</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">Tailwind</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">Stripe</span>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center space-x-3">
+        <a href="#" class="text-blue-400 font-medium">Live Demo →</a>
+        <a href="#" class="text-gray-400 text-sm">GitHub Repo</a>
+      </div>
+    </article>
+
+    <!-- Shery-OS -->
+    <article class="bg-gray-800 p-6 rounded-lg flex flex-col justify-between">
+      <div>
+        <h4 class="text-xl font-bold">Shery-OS</h4>
+        <p class="text-gray-400 mt-2 text-sm">
+          A realtime, web-based “operating system” multi-window UI, draggable apps, and realtime state sync.
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">React</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">WebSockets</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">IndexedDB</span>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center space-x-3">
+        <a href="#" class="text-blue-400 font-medium">Live Demo →</a>
+        <a href="#" class="text-gray-400 text-sm">GitHub Repo</a>
+      </div>
+    </article>
+
+    <!-- Animation-rich site -->
+    <article class="bg-gray-800 p-6 rounded-lg flex flex-col justify-between">
+      <div>
+        <h4 class="text-xl font-bold">Animation-Rich Website</h4>
+        <p class="text-gray-400 mt-2 text-sm">
+          A pixel-perfect, animation-first website inspired by award-winning designs  heavy on micro-interactions.
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">HTML</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">CSS / SCSS</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">GSAP</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">Lottie</span>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center space-x-3">
+        <a href="#" class="text-blue-400 font-medium">Live Demo →</a>
+        <a href="#" class="text-gray-400 text-sm">GitHub Repo</a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- BACKEND / AI PROJECTS -->
+  <h3 class="text-2xl font-semibold mt-12 mb-4 text-gray-200">Backend & AI Projects</h3>
+  <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+    <!-- Perplexity -->
+    <article class="bg-gray-800 p-6 rounded-lg flex flex-col justify-between">
+      <div>
+        <h4 class="text-xl font-bold">Perplexity</h4>
+        <p class="text-gray-400 mt-2 text-sm">
+          A brief-research AI tool that processes queries and returns concise research summaries.
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">Python</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">FastAPI</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">Vector DB</span>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center space-x-3">
+        <a href="#" class="text-blue-400 font-medium">Service →</a>
+        <a href="#" class="text-gray-400 text-sm">GitHub Repo</a>
+      </div>
+    </article>
+
+    <!-- Tiny Cats -->
+    <article class="bg-gray-800 p-6 rounded-lg flex flex-col justify-between">
+      <div>
+        <h4 class="text-xl font-bold">Tiny Cats</h4>
+        <p class="text-gray-400 mt-2 text-sm">
+          AI app that converts user thoughts into visuals & stories using multimodal models.
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">Node.js</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">AI APIs</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">Storage</span>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center space-x-3">
+        <a href="#" class="text-blue-400 font-medium">Try →</a>
+        <a href="#" class="text-gray-400 text-sm">GitHub Repo</a>
+      </div>
+    </article>
+
+    <!-- Cyber Dome -->
+    <article class="bg-gray-800 p-6 rounded-lg flex flex-col justify-between">
+      <div>
+        <h4 class="text-xl font-bold">Cyber Dome</h4>
+        <p class="text-gray-400 mt-2 text-sm">
+          An AI Battle Arena where multiple AI agents/models compete  realtime match orchestration and scoring.
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">Docker</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">Kubernetes</span>
+          <span class="text-xs px-2 py-1 bg-gray-700 rounded">WebSockets</span>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center space-x-3">
+        <a href="#" class="text-blue-400 font-medium">Arena →</a>
+        <a href="#" class="text-gray-400 text-sm">GitHub Repo</a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- ULTIMATE PROJECT -->
+  <!-- ULTIMATE PROJECT - FULL WIDTH -->
+<h3 class="text-2xl font-semibold mt-12 mb-4 text-gray-200">Ultimate Project</h3>
+
+<div class="w-full">
+
+  <article class="bg-gradient-to-r from-indigo-700 via-purple-700 to-fuchsia-600 
+                   p-10 rounded-2xl text-white w-full shadow-xl">
+
+    <h4 class="text-3xl font-extrabold mb-4">Sync Space</h4>
+
+    <p class="text-base md:text-lg leading-relaxed">
+      Sync Space is a next-gen virtual co-working space powered entirely by autonomous AI agents 
+      that behave like real employees  assigning tasks, tracking progress, collaborating, and 
+      completing jobs automatically. Features include real-time collaboration, agent orchestrations, 
+      productivity analytics, and an intelligent task manager.
+    </p>
+
+    <!-- Tech Badges -->
+    <div class="mt-5 flex flex-wrap gap-2">
+      <span class="text-xs px-3 py-1 bg-white/20 rounded-full">AI Agents</span>
+      <span class="text-xs px-3 py-1 bg-white/20 rounded-full">Realtime Engine</span>
+      <span class="text-xs px-3 py-1 bg-white/20 rounded-full">WebRTC</span>
+      <span class="text-xs px-3 py-1 bg-white/20 rounded-full">MERN</span>
+      <span class="text-xs px-3 py-1 bg-white/20 rounded-full">Python</span>
+    </div>
+
+    <!-- Buttons -->
+    <div class="mt-6 flex items-center gap-4">
+      <a href="#"
+         class="bg-white text-indigo-800 font-bold px-5 py-3 rounded-lg hover:bg-gray-200 transition">
+        Explore Project →
+      </a>
+      <!-- <a href="#" class="text-white/80 underline text-sm">GitHub Repo</a> -->
+    </div>
+
+  </article>
+
+</div>
+
+
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section id="contact" class="px-6 md:px-20 py-20">
+    <h2 class="text-4xl font-bold mb-6 text-blue-400">Contact</h2>
+
+    <p class="text-gray-300 mb-4">Email: sahil@example.com</p>
+    <p class="text-gray-300 mb-4">GitHub: github.com/sahil</p>
+    <p class="text-gray-300 mb-6">LinkedIn: linkedin.com/in/sahil</p>
+
+    <form class="grid gap-4 max-w-xl">
+      <input type="text" placeholder="Your Name" class="p-3 bg-gray-800 rounded-lg">
+      <input type="email" placeholder="Your Email" class="p-3 bg-gray-800 rounded-lg">
+      <textarea placeholder="Your Message" rows="4" class="p-3 bg-gray-800 rounded-lg"></textarea>
+      <button class="px-6 py-3 bg-blue-500 rounded-lg hover:bg-blue-600">Send Message</button>
+    </form>
+  </section>
+
+  <!-- ========== SCRIPT ========== -->
+  <script>
+    const btn = document.getElementById("menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    btn.addEventListener("click", ()=>{
+      menu.classList.toggle("hidden");
+    });
+
+    // Scroll ke baad bhi menu kaam kare
+    window.addEventListener("scroll", ()=>{
+      if(!menu.classList.contains("hidden")){
+        menu.classList.remove("hidden");
+      }
+    });
+  </script>
+
+</body>
+</html>
