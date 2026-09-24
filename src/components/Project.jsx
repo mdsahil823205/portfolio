@@ -78,7 +78,7 @@ const techAnimation = {
 const projects = [
   {
     number: "01",
-    title: "WebGen AI",
+    title: "Archon Ai",
     category: "AI & FULL-STACK APPLICATION",
     description:
       "An intelligent AI-powered website builder that transforms natural language prompts into responsive, production-ready code with interactive preview environments.",
@@ -92,9 +92,9 @@ const projects = [
       { name: "Gemini", icon: SiGoogle },
       { name: "OpenRouter", icon: RiRobot2Line },
     ],
-    github: "https://github.com/mdsahil823205/WEB_GEN_AI",
-    live: "https://web-gen-ai-two.vercel.app/",
-    image: "/webgenai.png",
+    github: "https://github.com/mdsahil823205/ARCHON_AI",
+    live: "https://archonaibuilder.vercel.app/",
+    image: "/archonai.png",
     featured: true,
   },
   {
