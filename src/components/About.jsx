@@ -120,7 +120,7 @@ const About = () => {
               className="mt-7 leading-7 text-zinc-500 dark:text-zinc-500"
             >
               I like understanding how the different pieces of a product fit
-              together — from the way a user interacts with an application to
+              together, from the way a user interacts with an application to
               how its APIs, databases, and services work behind the scenes.
             </motion.p>
 
