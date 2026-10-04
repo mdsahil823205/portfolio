@@ -46,6 +46,29 @@
 }
 
 /* ============================================================
+   SMOOTH THEME TRANSITION
+   ▸ Applied ONLY while .theme-transitioning is on <html>.
+   ▸ Uses the two cheapest repaint properties: color + background-color.
+   ▸ Excludes transform / opacity so Framer Motion animations are unaffected.
+   ▸ will-change hint tells the GPU to prepare a composite layer.
+   ============================================================ */
+
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  will-change: background-color, color, border-color !important;
+  transition:
+    background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Clean up will-change after transition so it doesn't hog GPU memory */
+html:not(.theme-transitioning) * {
+  will-change: auto;
+}
+
+/* ============================================================
    REDUCED MOTION — skip all animations for accessibility
    ============================================================ */
 
@@ -85,10 +108,36 @@ html.lenis body {
    PERFORMANCE UTILITIES
    ============================================================ */
 
+/* Promote to its own GPU layer — use sparingly on animated elements */
 .gpu {
   transform: translateZ(0);
-  will-change: transform;
   backface-visibility: hidden;
+}
+
+/**
+ * contain: paint
+ * Tells the browser each section is a "paint boundary" — changes inside
+ * one section don't trigger repaints in other sections. Critical for
+ * keeping theme-switch fast when there are many DOM nodes.
+ */
+section {
+  contain: paint;
+}
+
+/**
+ * content-visibility: auto
+ * Browser skips rendering/layout for off-screen sections until they scroll
+ * into view. Cuts initial page load paint time significantly and also
+ * reduces the number of elements that need to repaint during theme switch.
+ *
+ * contain-intrinsic-size prevents layout shift on first scroll reveal.
+ */
+#about,
+#skills,
+#projects,
+#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 800px;
 }
 
 

@@ -6,8 +6,7 @@ import Lenis from "lenis";
 const LenisContext = createContext(null);
 
 /**
- * Returns the Lenis instance so child components can interact with it
- * (e.g. the Header can listen to scroll events for hide/show behaviour).
+ * useLenis — returns the live Lenis instance ref.
  */
 export function useLenis() {
   return useContext(LenisContext);
@@ -16,55 +15,59 @@ export function useLenis() {
 /**
  * SmoothScrollProvider
  *
- * Initialises Lenis smooth scroll with optimal settings for a portfolio:
- * - duration 1.2s with an exponential easing
- * - touchMultiplier 1.5 for a natural mobile feel
- * - Syncs Lenis with RAF; cleans up on unmount
- *
- * Wraps children so the whole page benefits from smooth scrolling.
+ * Key optimisations:
+ *  1. Pauses the RAF loop when the browser tab is hidden (Page Visibility API).
+ *  2. Single cancellable RAF handle — no memory leak on unmount.
+ *  3. Lower duration on low-end hardware for a more responsive feel.
+ *  4. Broadcasts a CustomEvent so the Header tracks scroll without its own listener.
  */
 export function SmoothScrollProvider({ children }) {
   const lenisRef = useRef(null);
-  const rafRef = useRef(null);
+  const rafIdRef = useRef(null);
 
   useEffect(() => {
-    // Detect low-end devices via deviceMemory / hardwareConcurrency
     const isLowEnd =
       (navigator.deviceMemory && navigator.deviceMemory < 2) ||
       (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2);
 
     const lenis = new Lenis({
-      duration: isLowEnd ? 0.8 : 1.2,
+      duration: isLowEnd ? 0.7 : 1.15,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      // Lower touch multiplier on low-end to avoid jank
-      touchMultiplier: isLowEnd ? 1 : 1.5,
+      wheelMultiplier: isLowEnd ? 0.9 : 1.1,
+      touchMultiplier: isLowEnd ? 1.0 : 1.4,
       infinite: false,
     });
 
     lenisRef.current = lenis;
 
-    // Keep lenis in sync with the standard scroll position
-    // so native scroll events (IntersectionObserver, etc.) still fire
     lenis.on("scroll", ({ scroll }) => {
-      // Dispatch a synthetic scroll event so libraries that listen
-      // to window scroll (header, analytics, etc.) keep working
       window.dispatchEvent(
         new CustomEvent("lenis-scroll", { detail: { scroll } })
       );
     });
 
-    function raf(time) {
-      lenis.raf(time);
-      rafRef.current = requestAnimationFrame(raf);
-    }
+    let hidden = false;
 
-    rafRef.current = requestAnimationFrame(raf);
+    const tick = (time) => {
+      if (!hidden) lenis.raf(time);
+      rafIdRef.current = requestAnimationFrame(tick);
+    };
+
+    rafIdRef.current = requestAnimationFrame(tick);
+
+    const handleVisibilityChange = () => {
+      hidden = document.hidden;
+      if (!hidden) lenis.start();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       lenis.destroy();
       lenisRef.current = null;
     };

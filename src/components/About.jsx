@@ -39,7 +39,7 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
+      staggerChildren: 0.08,
     },
   },
 };
@@ -76,7 +76,7 @@ const About = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2, margin: "-50px" }}
           className="max-w-4xl"
         >
           <motion.p
@@ -102,7 +102,7 @@ const About = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1, margin: "-50px" }}
             className="max-w-2xl"
           >
             <motion.p
@@ -163,7 +163,7 @@ const About = () => {
                   key={item.number}
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
+                  viewport={{ once: true, amount: 0.1, margin: "-30px" }}
                   transition={{
                     duration: 0.6,
                     delay: index * 0.08,

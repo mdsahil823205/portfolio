@@ -18,48 +18,46 @@ const Header = () => {
   const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY < 140) {
+    /**
+     * Single unified handler for both native scroll and Lenis scroll events.
+     * We use the same reference so both addEventListener calls share one
+     * function object and we can remove them cleanly on unmount.
+     *
+     * Uses { passive: true } on the native scroll listener to prevent
+     * blocking the browser's scroll pipeline.
+     */
+    const handleScroll = (scrollY) => {
+      if (scrollY < 140) {
         setIsHeaderVisible(true);
-      } else if (currentScrollY > lastScrollY.current) {
+      } else if (scrollY > lastScrollY.current) {
         setIsHeaderVisible(false);
       } else {
         setIsHeaderVisible(true);
       }
-
-      lastScrollY.current = currentScrollY;
+      lastScrollY.current = scrollY;
     };
 
-    // Listen for both native scroll and Lenis custom scroll events
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("lenis-scroll", (e) => {
-      const currentScrollY = e.detail.scroll;
-      if (currentScrollY < 140) {
-        setIsHeaderVisible(true);
-      } else if (currentScrollY > lastScrollY.current) {
-        setIsHeaderVisible(false);
-      } else {
-        setIsHeaderVisible(true);
-      }
-      lastScrollY.current = currentScrollY;
-    });
+    const onNativeScroll = () => handleScroll(window.scrollY);
+    const onLenisScroll = (e) => handleScroll(e.detail.scroll);
+
+    window.addEventListener("scroll", onNativeScroll, { passive: true });
+    window.addEventListener("lenis-scroll", onLenisScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", onNativeScroll);
+      window.removeEventListener("lenis-scroll", onLenisScroll);
     };
   }, []);
 
   return (
     <header
-      className={` sticky top-0 z-50 transition-transform duration-300 ease-out ${
+      className={`sticky top-0 z-50 transition-transform duration-300 ease-out ${
         isHeaderVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <nav className=" mx-auto flex h-[59px] max-w-7xl items-center justify-center gap-3 px-2 sm:px-4 lg:px-8 lg:h-[69px]">
+      <nav className="mx-auto flex h-[59px] max-w-7xl items-center justify-center gap-3 px-2 sm:px-4 lg:px-8 lg:h-[69px]">
         {/* Navigation pill */}
-        <ul className=" flex w-auto max-w-full items-center justify-center gap-[clamp(2px,0.35vw,6px)] overflow-x-auto rounded-lg border border-black/10 bg-[var(--header-bg)] p-[clamp(3px,0.35vw,6px)] shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-2xl dark:border-white/15 dark:bg-white/6 dark:shadow-[0_8px_32px_rgba(0,0,0,0.76)]">
+        <ul className="flex w-auto max-w-full items-center justify-center gap-[clamp(2px,0.35vw,6px)] overflow-x-auto rounded-lg border border-black/10 bg-[var(--header-bg)] p-[clamp(3px,0.35vw,6px)] shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-2xl dark:border-white/15 dark:bg-white/6 dark:shadow-[0_8px_32px_rgba(0,0,0,0.76)]">
           {navLinks.map((link) => (
             <li key={link.name} className="shrink-0">
               <Link

@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="relative min-h-screen overflow-x-hidden bg-[var(--bg-base)] text-[var(--text-primary)] transition-colors duration-300">
+      <body className="relative min-h-screen overflow-x-hidden bg-[var(--bg-base)] text-[var(--text-primary)]">
         <ThemeProvider>
           <SmoothScrollProvider>
             <Header />

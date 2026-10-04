@@ -46,7 +46,7 @@ const fadeScale = {
 
 const projectContainer = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
+  show: { transition: { staggerChildren: 0.06 } },
 };
 
 const cardAnimation = {
@@ -60,7 +60,7 @@ const cardAnimation = {
 
 const techContainer = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.06 } },
+  show: { transition: { staggerChildren: 0.04 } },
 };
 
 const techAnimation = {
@@ -188,7 +188,7 @@ const Project = () => {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2, margin: "-50px" }}
           className="max-w-4xl"
         >
           <p className="text-[11px] font-semibold tracking-[0.28em] text-amber-500 dark:text-amber-400 sm:text-sm">
@@ -412,7 +412,7 @@ const Project = () => {
           variants={projectContainer}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.05, margin: "-30px" }}
           className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-2 lg:grid-cols-2 sm:gap-6"
         >
           {otherProjects.map((project) => (

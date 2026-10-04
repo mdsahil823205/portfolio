@@ -83,9 +83,15 @@ const Hero = () => {
 
   const handleMouseMove = (e) => {
     if (shouldReduceMotion) return;
-    const { innerWidth, innerHeight } = window;
-    mouseX.set((e.clientX / innerWidth - 0.5) * 2);
-    mouseY.set((e.clientY / innerHeight - 0.5) * 2);
+    // Throttle to one update per animation frame — avoids flooding the
+    // motion value with dozens of updates per 16ms frame
+    if (handleMouseMove._raf) return;
+    handleMouseMove._raf = requestAnimationFrame(() => {
+      handleMouseMove._raf = null;
+      const { innerWidth, innerHeight } = window;
+      mouseX.set((e.clientX / innerWidth - 0.5) * 2);
+      mouseY.set((e.clientY / innerHeight - 0.5) * 2);
+    });
   };
 
   const handleMouseLeave = () => {
@@ -104,28 +110,28 @@ const Hero = () => {
       ====================================================== */}
 
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Main ambient glow — reduced blur for perf */}
+        {/* Main ambient glow */}
         <motion.div
           animate={shouldReduceMotion ? {} : {
-            scale: [1, 1.12, 1],
-            opacity: [0.18, 0.28, 0.18],
+            scale: [1, 1.08, 1],
+            opacity: [0.15, 0.22, 0.15],
           }}
           transition={{
-            duration: 7,
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute left-[45%] top-[20%] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-amber-400/[0.06] blur-[80px] dark:bg-amber-400/[0.06] will-change-transform"
+          className="absolute left-[45%] top-[20%] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-amber-400/[0.06] blur-[80px] dark:bg-amber-400/[0.06]"
         />
 
         {/* Small moving glow */}
         <motion.div
           animate={shouldReduceMotion ? {} : {
-            x: [0, 60, 0],
-            y: [0, -40, 0],
+            x: [0, 50, 0],
+            y: [0, -30, 0],
           }}
           transition={{
-            duration: 10,
+            duration: 12,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -261,7 +267,7 @@ const Hero = () => {
             {[
               { label: "GitHub", icon: <FiGithub />, href: "https://github.com/mdsahil823205", ariaLabel: "GitHub", target: "_blank" },
               { label: "LinkedIn", icon: <FiLinkedin />, href: "https://www.linkedin.com/in/md-sahil-101805257/", ariaLabel: "LinkedIn", target: "_blank" },
-              { label: "Email", icon: <FiMail />, href: "mailto:mdsahil823205@gmail.com", ariaLabel: "Email",target: "_blank" },
+              { label: "Email", icon: <FiMail />, href: "mailto:mdsahil823205@gmail.com", ariaLabel: "Email", target: "_blank" },
             ].map((social) => (
               <Link
                 key={social.label}
@@ -326,10 +332,10 @@ const Hero = () => {
 
           <motion.div
             animate={shouldReduceMotion ? {} : {
-              scale: [1, 1.04, 1],
-              opacity: [0.08, 0.14, 0.08],
+              scale: [1, 1.03, 1],
+              opacity: [0.07, 0.12, 0.07],
             }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             className="absolute left-1/2 top-1/2 z-0 h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-400/10 blur-[60px] will-change-transform"
           />
 

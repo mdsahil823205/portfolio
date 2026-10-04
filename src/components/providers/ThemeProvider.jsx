@@ -3,11 +3,15 @@
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 /**
- * Wraps the app with next-themes ThemeProvider.
- * - attribute="class"  → adds/removes "dark" class on <html>
- * - defaultTheme="dark" → starts in dark mode
- * - enableSystem=false  → user toggle only, no OS preference override
- * - disableTransitionOnChange=false → allows CSS transitions on theme switch
+ * ThemeProvider
+ *
+ * IMPORTANT: disableTransitionOnChange={true}
+ *
+ * next-themes' built-in approach with disableTransitionOnChange=false
+ * disables ALL CSS transitions temporarily then re-enables them, which
+ * causes a flash. We handle smooth transitions manually via the
+ * .theme-transitioning class added in ThemeToggle.jsx — that way we
+ * get a silky 400ms cross-fade without any flash-of-unstyled-content.
  */
 export function ThemeProvider({ children }) {
   return (
@@ -15,7 +19,7 @@ export function ThemeProvider({ children }) {
       attribute="class"
       defaultTheme="dark"
       enableSystem={false}
-      disableTransitionOnChange={false}
+      disableTransitionOnChange={true}
     >
       {children}
     </NextThemesProvider>
