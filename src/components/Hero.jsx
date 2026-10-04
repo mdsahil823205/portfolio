@@ -240,7 +240,7 @@ const Hero = () => {
               className="group h-11 rounded-full border-black/15 bg-black/[0.04] px-5 text-zinc-700 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/40 hover:bg-black/[0.07] hover:text-zinc-900 dark:border-white/15 dark:bg-white/[0.03] dark:text-zinc-200 dark:hover:border-amber-400/40 dark:hover:bg-white/[0.07] dark:hover:text-white"
             >
               <a
-                href="/Sahil-Resume.pdf"
+                href="/mohammed_sahil_resume.pdf"
                 download
                 className="flex items-center gap-2"
               >
